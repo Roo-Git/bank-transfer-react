@@ -1,5 +1,8 @@
 import React from "react"
 import { Container, Form, Button, Card} from "react-bootstrap"
+import FacebookIcon from '@material-ui/icons/Facebook';
+import EmailIcon from '@material-ui/icons/Email';
+import TwitterIcon from '@material-ui/icons/Twitter';
 
 
 export default function Login() {
@@ -33,8 +36,10 @@ export default function Login() {
             </Button>
           </Form>
         </Card.Body>
-        <Card.Body>
-          Icono Facebook - Icono Email - Icono Instagram
+        <Card.Body className="d-flex align-items-center justify-content-center">
+         <FacebookIcon style={{ cursor: "pointer"}}/>
+         <EmailIcon style={{ cursor: "pointer"}}/>
+         <TwitterIcon style={{ cursor: "pointer"}}/>
         </Card.Body>
       </Card>
     </Container>
