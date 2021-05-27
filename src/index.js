@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Firebase
+import './firebase/firebaseConfig';
+
 // Redux
 import {Provider} from 'react-redux'
 import store from './redux/store'
