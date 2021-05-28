@@ -3,8 +3,9 @@ import { Container, Form, Button, Card, Alert} from "react-bootstrap"
 import { useAuth } from '../../contexts/AuthContext';
 import { useHistory } from "react-router-dom"
 import FacebookIcon from '@material-ui/icons/Facebook';
-import EmailIcon from '@material-ui/icons/Email';
 import TwitterIcon from '@material-ui/icons/Twitter';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faGoogle} from '@fortawesome/free-brands-svg-icons';
 
 
 export default function Login() {
@@ -56,9 +57,9 @@ export default function Login() {
           </Form>
         </Card.Body>
         <Card.Body className="d-flex align-items-center justify-content-center">
-         <FacebookIcon style={{ cursor: "pointer"}}/>
-         <EmailIcon style={{ cursor: "pointer"}}/>
-         <TwitterIcon style={{ cursor: "pointer"}}/>
+          <FontAwesomeIcon icon={faGoogle} style={{ cursor: "pointer"}}/>
+          <FacebookIcon style={{ cursor: "pointer"}}/>
+          <TwitterIcon style={{ cursor: "pointer"}}/>
         </Card.Body>
       </Card>
     </Container>
