@@ -1,11 +1,12 @@
 import React, { useRef, useState } from "react"
-import { Container, Form, Button, Card, Alert} from "react-bootstrap"
+import { Container, Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from '../../contexts/AuthContext';
+import { signInWithGoogle } from '../../firebase';
 import { useHistory } from "react-router-dom"
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faGoogle} from '@fortawesome/free-brands-svg-icons';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 
 export default function Login() {
@@ -31,6 +32,19 @@ export default function Login() {
     setLoading(false)
   }
 
+  // Google Auth Provider
+
+  async function handleClick(e) {
+    e.preventDefault()
+
+    try {
+    await signInWithGoogle()
+    history.push("/")
+    } catch {
+      setError("Failed to log in")
+    }
+  }
+
 
   return (
     <>
@@ -51,18 +65,19 @@ export default function Login() {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
-            <Button className="w-100" type="submit">
+            <Button disabled={loading} className="w-100" type="submit">
               Sign In
             </Button>
           </Form>
         </Card.Body>
         <Card.Body className="d-flex align-items-center justify-content-center">
-          <FontAwesomeIcon icon={faGoogle} style={{ cursor: "pointer"}}/>
-          <FacebookIcon style={{ cursor: "pointer"}}/>
-          <TwitterIcon style={{ cursor: "pointer"}}/>
+          <FontAwesomeIcon icon={faGoogle} onClick={handleClick} style={{ cursor: "pointer", margin: "4px"}}/>
+          <FacebookIcon style={{ cursor: "pointer", margin: "4px"}}/>
+          <TwitterIcon style={{ cursor: "pointer", margin: "4px"}}/>
         </Card.Body>
       </Card>
     </Container>
     </>
   )
 }
+
