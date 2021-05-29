@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react"
 import { Container, Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from '../../contexts/AuthContext';
-import { signInWithGoogle } from '../../firebase';
+import { signInWithGoogle, signInWithFacebook} from '../../firebase';
 import { useHistory } from "react-router-dom"
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
@@ -32,9 +32,9 @@ export default function Login() {
     setLoading(false)
   }
 
-  // Google Auth Provider
+  // Sign in with Google
 
-  async function handleClick(e) {
+  async function handleClickGoogle(e) {
     e.preventDefault()
 
     try {
@@ -44,6 +44,21 @@ export default function Login() {
       setError("Failed to log in")
     }
   }
+
+  // Sign in with Facebook
+
+  async function handleClickFacebook(e) {
+    e.preventDefault()
+
+    try {
+    await signInWithFacebook()
+    history.push("/")
+    } catch {
+      setError("Failed to log in")
+    }
+  }
+
+
 
 
   return (
@@ -71,8 +86,8 @@ export default function Login() {
           </Form>
         </Card.Body>
         <Card.Body className="d-flex align-items-center justify-content-center">
-          <FontAwesomeIcon icon={faGoogle} onClick={handleClick} style={{ cursor: "pointer", margin: "4px"}}/>
-          <FacebookIcon style={{ cursor: "pointer", margin: "4px"}}/>
+          <FontAwesomeIcon icon={faGoogle} onClick={handleClickGoogle} style={{ cursor: "pointer", margin: "4px"}}/>
+          <FacebookIcon onClick={handleClickFacebook} style={{ cursor: "pointer", margin: "4px"}}/>
           <TwitterIcon style={{ cursor: "pointer", margin: "4px"}}/>
         </Card.Body>
       </Card>
