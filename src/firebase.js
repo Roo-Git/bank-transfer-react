@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
-// Firebase config
+// Firebase Config
 
 const app = firebase.initializeApp({
   apiKey: "AIzaSyCo_mMIY50ocfni0n7_b8LcPcWmvuj3Tb8",
@@ -12,6 +12,8 @@ const app = firebase.initializeApp({
   appId: "1:932664772963:web:bb696c629347266d74eb56",
 })
 
+// Firebase Auth
+
 export const auth = app.auth()
 export default app
 
@@ -21,7 +23,7 @@ const provider = new firebase.auth.GoogleAuthProvider();
 
 provider.setCustomParameters({
 
-  promt: "select_account",
+  prompt: "select_account",
 });
 
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
@@ -31,8 +33,20 @@ export const signInWithGoogle = () => auth.signInWithPopup(provider);
 const facebookProvider = new firebase.auth.FacebookAuthProvider()
 
 facebookProvider.setCustomParameters({
-  promt: "select_acount",
+  prompt: "select_acount",
 
 });
 
 export const signInWithFacebook = () => auth.signInWithPopup(facebookProvider)
+
+// Twitter Auth Provider
+
+const twitterProvider = new firebase.auth.TwitterAuthProvider()
+
+twitterProvider.setCustomParameters({
+  prompt: "select_acount",
+
+});
+
+export const signInWithTwitter = () => auth.signInWithPopup(twitterProvider)
+

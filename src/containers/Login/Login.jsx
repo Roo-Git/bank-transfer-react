@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react"
 import { Container, Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from '../../contexts/AuthContext';
-import { signInWithGoogle, signInWithFacebook} from '../../firebase';
+import { signInWithGoogle, signInWithFacebook, signInWithTwitter} from '../../firebase';
 import { useHistory } from "react-router-dom"
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
@@ -43,7 +43,7 @@ export default function Login() {
     } catch {
       setError("Failed to log in")
     }
-  }
+  };
 
   // Sign in with Facebook
 
@@ -56,7 +56,20 @@ export default function Login() {
     } catch {
       setError("Failed to log in")
     }
-  }
+  };
+
+  // Sign in with Twitter
+
+  async function handleClickTwitter(e) {
+     e.preventDefault()
+  
+    try {
+    await signInWithTwitter()
+    history.push("/")
+    } catch {
+      setError("Failed to log in")
+    }
+  };
 
 
 
@@ -88,7 +101,7 @@ export default function Login() {
         <Card.Body className="d-flex align-items-center justify-content-center">
           <FontAwesomeIcon icon={faGoogle} onClick={handleClickGoogle} style={{ cursor: "pointer", margin: "4px"}}/>
           <FacebookIcon onClick={handleClickFacebook} style={{ cursor: "pointer", margin: "4px"}}/>
-          <TwitterIcon style={{ cursor: "pointer", margin: "4px"}}/>
+          <TwitterIcon onClick={handleClickTwitter} style={{ cursor: "pointer", margin: "4px"}}/>
         </Card.Body>
       </Card>
     </Container>
